@@ -13,7 +13,8 @@ Take a look at the live demo [here](https://pokemon-quiz.rabeyrathna.com/)!
 - **Listen to Pokémon Cries** – Audio plays at the start of each round.
 - **Multiple Choice Answers** – Pick the correct Pokémon from a list of options.
 - **Customizable Game Settings** – Choose number of rounds, difficulty, and which Pokémon generations to include.
-- **Hints** – Option to reveal a silhouette of the Pokémon for extra help.
+- **Hints** – Option to reveal a silhouette of the Pokémon for extra help or a part of it's Pokédex entry
+- **Switch Mode** - Potentially the option to guess the Pokémon based off the dex entry instead of the cry
 - **Timer Mode** – Optional time limit for each question for added challenge.
 - **Score Tracking** – View your total correct answers and accuracy at the end.
 - **Replayability** – Randomized Pokémon selection each round.

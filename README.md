@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pokémon Cry Quiz
 
-## Getting Started
+A fun and challenging quiz game for Pokémon fans!  
+Players will hear a Pokémon's cry and must choose the correct Pokémon from multiple options.  
+Test your memory, learn new cries, and compete for the best score.
 
-First, run the development server:
+Take a look at the live demo [here](https://pokemon-quiz.rabeyrathna.com/)!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Listen to Pokémon Cries** – Audio plays at the start of each round.
+- **Multiple Choice Answers** – Pick the correct Pokémon from a list of options.
+- **Customizable Game Settings** – Choose number of rounds, difficulty, and which Pokémon generations to include.
+- **Hints** – Option to reveal a silhouette of the Pokémon for extra help.
+- **Timer Mode** – Optional time limit for each question for added challenge.
+- **Score Tracking** – View your total correct answers and accuracy at the end.
+- **Replayability** – Randomized Pokémon selection each round.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **HTML** – Base markup.
+- **TypeScript** – Type-safe JavaScript for reliability.
+- **React** – Component-based UI building.
+- **TailwindCSS** – Utility-first styling for responsive design.
+- **Firebase** – Optional authentication and data storage for leaderboards or achievements.
+- **[PokéAPI](https://pokeapi.co/)** – Pokémon data, audio and sprite resources
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## To Do
 
-## Deploy on Vercel
+### Functionality
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [ ] Play Pokémon cry at the start of each round.
+- [ ] Allow players to choose the number of rounds.
+- [ ] Add optional time limit per question.
+- [ ] Enable hint system with Pokémon silhouette.
+- [ ] Let players choose generations included in the quiz.
+- [ ] Track and display scores at the end of each game.
+- [ ] Save high scores and player stats using Firebase.
+- [ ] Add a "Practice Mode" with unlimited cries for learning.
+- [ ] Implement difficulty levels (e.g., more answer choices for harder mode).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling
+
+- [ ] Pokémon-themed design with TailwindCSS.
+- [ ] Mobile and desktop responsive layout.
+- [ ] Animations for correct/incorrect answers.
+- [ ] Visual effects for hints and round transitions.
+
+### Other
+
+- [ ] Deploy live demo on Netlify.
+- [ ] Optimise audio loading for faster gameplay.
+- [ ] Add sound toggle and volume control.
+- [ ] Create an achievement/badge system for milestones.

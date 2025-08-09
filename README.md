@@ -4,7 +4,7 @@ A fun and challenging quiz game for Pokémon fans!
 Players will hear a Pokémon's cry and must choose the correct Pokémon from multiple options.  
 Test your memory, learn new cries, and compete for the best score.
 
-Take a look at the live demo [here](https://pokemon-quiz.rabeyrathna.com/)!
+Take a look at the live demo [here](https://pokequiz.rabeyrathna.com/)!
 
 ---
 

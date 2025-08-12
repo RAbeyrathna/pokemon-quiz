@@ -1,11 +1,8 @@
 "use client";
 import { useState } from "react";
 
-export type GameSettings = {
-  rounds: number;
-  choices: number;
-  generations: number[];
-};
+import { GameSettings } from "../types/game";
+import { generations as allGenerations } from "../hooks/usePokemonQuiz";
 
 type SettingsProps = {
   onStart: (settings: GameSettings) => void;
@@ -14,7 +11,7 @@ type SettingsProps = {
 export default function Settings({ onStart }: SettingsProps) {
   const [rounds, setRounds] = useState(5);
   const [choices, setChoices] = useState(4);
-  const [generations, setGenerations] = useState<number[]>([1]); // start with Gen 1
+  const [generations, setGenerations] = useState<number[]>([1]);
 
   const toggleGeneration = (gen: number) => {
     if (generations.includes(gen)) {
@@ -26,11 +23,18 @@ export default function Settings({ onStart }: SettingsProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (generations.length === 0) {
       alert("Please select at least one generation");
       return;
     }
-    onStart({ rounds, choices, generations });
+
+    // Map number array to full generation objects here
+    const selectedGenerations = allGenerations.filter((g) =>
+      generations.includes(g.gen)
+    );
+
+    onStart({ rounds, choices, generations: selectedGenerations });
   };
 
   return (
@@ -65,14 +69,14 @@ export default function Settings({ onStart }: SettingsProps) {
 
       <fieldset>
         <legend>Select Generations</legend>
-        {[1, 2, 3].map((gen) => (
+        {allGenerations.map(({ gen, name }) => (
           <label key={gen}>
             <input
               type="checkbox"
               checked={generations.includes(gen)}
               onChange={() => toggleGeneration(gen)}
             />
-            Generation {gen}
+            Generation {gen} - {name}
           </label>
         ))}
       </fieldset>

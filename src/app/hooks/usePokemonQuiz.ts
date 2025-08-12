@@ -1,18 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 
-import { GameSettings, PokemonOption } from "../types/game";
+import { GameSettings, Generations, PokemonOption } from "../types/game";
 
-const generationRanges: Record<number, [number, number]> = {
-  1: [1, 151], // Kanto
-  2: [152, 251], // Johto
-  3: [252, 386], // Hoenn
-  4: [387, 493], // Sinnoh
-  5: [494, 649], // Unova
-  6: [650, 721], // Kalos
-  7: [722, 809], // Alola
-  8: [810, 898], // Galar
-  9: [899, 1010], // Paldea
-};
+export const generations: Generations[] = [
+  { gen: 1, name: "Kanto", range: [1, 151] },
+  { gen: 2, name: "Johto", range: [152, 251] },
+  { gen: 3, name: "Hoenn", range: [252, 386] },
+  { gen: 4, name: "Sinnoh", range: [387, 493] },
+  { gen: 5, name: "Unova", range: [494, 649] },
+  { gen: 6, name: "Kalos", range: [650, 721] },
+  { gen: 7, name: "Alola", range: [722, 809] },
+  { gen: 8, name: "Galar", range: [810, 898] },
+  { gen: 9, name: "Paldea", range: [899, 1010] },
+];
 
 export function usePokemonQuiz(settings: GameSettings | null) {
   const [options, setOptions] = useState<PokemonOption[]>([]);
@@ -36,11 +36,17 @@ export function usePokemonQuiz(settings: GameSettings | null) {
 
     const ids = new Set<number>();
     while (ids.size < choices) {
-      const randomGen =
+      // Pick a random generation object from the generations array
+      const randomGenObj =
         generations[Math.floor(Math.random() * generations.length)];
-      const [startId, endId] = generationRanges[randomGen];
+
+      // Destructure the start and end of the range from the picked gen's range
+      const [startId, endId] = randomGenObj.range;
+
+      // Pick a random Pokemon ID within the range
       const randomId =
         Math.floor(Math.random() * (endId - startId + 1)) + startId;
+
       ids.add(randomId);
     }
 

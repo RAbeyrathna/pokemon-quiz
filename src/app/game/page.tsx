@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Settings, { GameSettings } from "../components/Settings";
+import Settings from "../components/Settings";
 import { usePokemonQuiz } from "../hooks/usePokemonQuiz";
+import { GameSettings } from "../types/game";
 
 export default function GamePage() {
   const router = useRouter();

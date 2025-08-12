@@ -2,44 +2,56 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import Settings, { GameSettings } from "../components/Settings";
 import { usePokemonQuiz } from "../hooks/usePokemonQuiz";
 
 export default function GamePage() {
   const router = useRouter();
-  const [gameStarted, setGameStarted] = useState(false);
-  const initialSettings = { rounds: 5, choices: 4, generations: [1] };
 
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null);
+
+  const quiz = usePokemonQuiz(gameSettings!); // non-null assertion because only called if gameSettings exists
+
+  const onStart = (settings: GameSettings) => {
+    setGameSettings(settings);
+    quiz.startGame(settings);
+  };
+
+  if (!gameSettings) {
+    // Show Settings form first, no game yet
+    return (
+      <div>
+        <h1>Pokémon Cry Quiz</h1>
+        <Settings onStart={onStart} />
+        <button onClick={() => router.push("/")}>Return Home</button>
+      </div>
+    );
+  }
+
+  // Game has started — destructure the hook's state and handlers
   const {
     options,
     correctAnswer,
     selectedAnswer,
-    gameSettings,
     round,
     score,
     gameOver,
     audioRef,
-    startGame,
     handleAnswerClick,
     handlePlayCry,
-  } = usePokemonQuiz(initialSettings);
-
-  const onStart = (settings: GameSettings) => {
-    startGame(settings);
-    setGameStarted(true);
-  };
+  } = quiz;
 
   return (
     <div>
       <h1>Pokémon Cry Quiz</h1>
 
-      {!gameStarted && <Settings onStart={onStart} />}
-
-      {gameStarted && !gameOver && (
+      {!gameOver && (
         <>
           <div>
             Round {round} of {gameSettings.rounds}
           </div>
+
           {correctAnswer && (
             <>
               <audio ref={audioRef} src={correctAnswer.cry} autoPlay />
@@ -74,11 +86,7 @@ export default function GamePage() {
             Score: {score} / {gameSettings.rounds}
           </p>
           <p>Accuracy: {Math.round((score / gameSettings.rounds) * 100)}%</p>
-          <button
-            onClick={() => {
-              startGame(gameSettings);
-            }}
-          >
+          <button onClick={() => quiz.startGame(gameSettings)}>
             Play Again
           </button>
         </div>

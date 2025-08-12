@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+
 import { GameSettings, PokemonOption } from "../types/game";
 
 const generationRanges: Record<number, [number, number]> = {
@@ -7,18 +8,20 @@ const generationRanges: Record<number, [number, number]> = {
   3: [252, 386],
 };
 
-export function usePokemonQuiz(initialSettings: GameSettings) {
+export function usePokemonQuiz(settings: GameSettings | null) {
   const [options, setOptions] = useState<PokemonOption[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<PokemonOption | null>(
     null
   );
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
-  const [gameSettings, setGameSettings] =
-    useState<GameSettings>(initialSettings);
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(
+    settings
+  );
   const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -58,14 +61,16 @@ export function usePokemonQuiz(initialSettings: GameSettings) {
     setRound(1);
     setScore(0);
     setGameOver(false);
+    setHasStarted(true);
     fetchPokemonData(settings);
   };
 
   useEffect(() => {
-    if (!gameOver) {
+    if (!gameOver && hasStarted && gameSettings) {
+      // Only fetch on round change after game has started
       fetchPokemonData(gameSettings);
     }
-  }, [round, gameSettings, gameOver]);
+  }, [round]);
 
   const handleAnswerClick = (name: string) => {
     setSelectedAnswer(name);
@@ -75,7 +80,7 @@ export function usePokemonQuiz(initialSettings: GameSettings) {
     }
 
     setTimeout(() => {
-      if (round < gameSettings.rounds) {
+      if (gameSettings && round < gameSettings.rounds) {
         setRound((prev) => prev + 1);
       } else {
         setGameOver(true);

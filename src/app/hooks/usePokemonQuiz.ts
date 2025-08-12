@@ -3,9 +3,15 @@ import { useState, useEffect, useRef } from "react";
 import { GameSettings, PokemonOption } from "../types/game";
 
 const generationRanges: Record<number, [number, number]> = {
-  1: [1, 151],
-  2: [152, 251],
-  3: [252, 386],
+  1: [1, 151], // Kanto
+  2: [152, 251], // Johto
+  3: [252, 386], // Hoenn
+  4: [387, 493], // Sinnoh
+  5: [494, 649], // Unova
+  6: [650, 721], // Kalos
+  7: [722, 809], // Alola
+  8: [810, 898], // Galar
+  9: [899, 1010], // Paldea
 };
 
 export function usePokemonQuiz(settings: GameSettings | null) {

@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
+import Settings, { GameSettings, SettingsProps } from "../components/Settings";
+
 type PokemonOption = {
   name: string;
   cry: string;
@@ -17,23 +19,59 @@ export default function GamePage() {
   );
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const [gameSettings, setGameSettings] = useState({
+    rounds: 5,
+    choices: 4,
+    generations: [1],
+  });
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Current game states
   const [round, setRound] = useState(1);
-  const [totalRounds, setTotalRounds] = useState(5);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  useEffect(() => {
-    fetchPokemonData();
-  }, []);
+  //Start game settings
+  const startGame = (settings: {
+    rounds: number;
+    choices: number;
+    generations: number[];
+  }) => {
+    setGameSettings(settings);
+    setGameStarted(true);
 
-  const fetchPokemonData = async () => {
-    const getRandomId = () => Math.floor(Math.random() * 151) + 1;
+    setScore(0);
+    setRound(1);
+    setGameOver(false);
+    fetchPokemonData(settings);
+  };
+
+  useEffect(() => {
+    if (gameStarted && !gameOver) {
+      fetchPokemonData(gameSettings);
+    }
+  }, [gameStarted, round, gameOver]);
+
+  const fetchPokemonData = async (settings: GameSettings) => {
+    const { choices, generations } = settings;
+
+    const generationRanges: Record<number, [number, number]> = {
+      1: [1, 151],
+      2: [152, 251],
+      3: [252, 386],
+    };
 
     const ids = new Set<number>();
-    while (ids.size < 4) {
-      ids.add(getRandomId());
+    while (ids.size < choices) {
+      const randomGen =
+        generations[Math.floor(Math.random() * generations.length)];
+      const [startId, endId] = generationRanges[randomGen];
+      const randomId =
+        Math.floor(Math.random() * (endId - startId + 1)) + startId;
+      ids.add(randomId);
     }
 
     const promises = Array.from(ids).map(async (id) => {
@@ -62,9 +100,9 @@ export default function GamePage() {
     }
 
     setTimeout(() => {
-      if (round < totalRounds) {
+      if (round < gameSettings.rounds) {
         setRound((prev) => prev + 1);
-        fetchPokemonData();
+        fetchPokemonData(gameSettings);
       } else {
         setGameOver(true);
       }
@@ -82,7 +120,13 @@ export default function GamePage() {
     <div>
       <h1>Pokémon Cry Quiz</h1>
 
-      {!gameOver && (
+      {!gameStarted && (
+        <>
+          <Settings onStart={startGame} />
+        </>
+      )}
+
+      {!gameOver && gameStarted && (
         <>
           {/* Play Cry */}
           {correctAnswer && (
@@ -118,15 +162,15 @@ export default function GamePage() {
         <div>
           <h1>Game Over!</h1>
           <p>
-            Score: {score} / {totalRounds}
+            Score: {score} / {gameSettings.rounds}
           </p>
-          <p>Accuracy: {Math.round((score / totalRounds) * 100)}%</p>
+          <p>Accuracy: {Math.round((score / gameSettings.rounds) * 100)}%</p>
           <button
             onClick={() => {
               setScore(0);
               setRound(1);
               setGameOver(false);
-              fetchPokemonData();
+              fetchPokemonData(gameSettings);
             }}
           >
             Play Again

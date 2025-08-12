@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 type PokemonOption = {
   name: string;
@@ -8,6 +9,8 @@ type PokemonOption = {
 };
 
 export default function GamePage() {
+  const router = useRouter();
+
   const [options, setOptions] = useState<PokemonOption[]>([]);
   const [correctAnswer, setCorrectAnswer] = useState<PokemonOption | null>(
     null
@@ -130,6 +133,7 @@ export default function GamePage() {
           </button>
         </div>
       )}
+      <button onClick={() => router.push("/")}>Return Home</button>
     </div>
   );
 }

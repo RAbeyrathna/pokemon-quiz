@@ -4,22 +4,38 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Settings from "../components/Settings";
-import { usePokemonQuiz } from "../hooks/usePokemonQuiz";
+import {
+  usePokemonQuiz,
+  generations as allGenerations,
+} from "../hooks/usePokemonQuiz";
 import { GameSettings } from "../types/game";
 
 export default function GamePage() {
   const router = useRouter();
 
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null);
+  const defaultGameSettings: GameSettings = {
+    rounds: 5,
+    choices: 4,
+    generations: allGenerations,
+  };
 
-  const quiz = usePokemonQuiz(gameSettings!); // non-null assertion because only called if gameSettings exists
+  const [gameSettings, setGameSettings] =
+    useState<GameSettings>(defaultGameSettings);
+  const [gameStarted, setGameStarted] = useState(false);
+
+  const quiz = usePokemonQuiz(gameStarted ? gameSettings : null);
 
   const onStart = (settings: GameSettings) => {
     setGameSettings(settings);
+    setGameStarted(true);
     quiz.startGame(settings);
   };
 
-  if (!gameSettings) {
+  const onResetGame = () => {
+    setGameStarted(false);
+  };
+
+  if (!gameStarted) {
     // Show Settings form first, no game yet
     return (
       <div>
@@ -90,6 +106,7 @@ export default function GamePage() {
           <button onClick={() => quiz.startGame(gameSettings)}>
             Play Again
           </button>
+          <button onClick={onResetGame}>Change Settings</button>
         </div>
       )}
 

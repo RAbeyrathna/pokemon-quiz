@@ -34,7 +34,11 @@ export default function Settings({ onStart }: SettingsProps) {
       generations.includes(g.gen)
     );
 
-    onStart({ rounds, choices, generations: selectedGenerations });
+    onStart({
+      rounds,
+      choices,
+      generations: selectedGenerations,
+    });
   };
 
   return (

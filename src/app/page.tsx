@@ -7,34 +7,28 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <header className="font-mono text-lg/6 text-center ">
-          Pokemon Cry Quiz
+    <div className="relative min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-sans bg-gray-50 dark:bg-gray-900">
+      <main className="flex flex-col items-center sm:items-start gap-8">
+        <header className="font-mono text-3xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center sm:text-left">
+          Pokémon Cry Quiz
         </header>
-        <a className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          Try become the very best!
-        </a>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <p className="font-mono text-sm sm:text-lg text-gray-700 dark:text-gray-300 text-center sm:text-left">
+          Try to become the very best!
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
           <button
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
             onClick={() => router.push("/game")}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Start game
+            <Image src="/pokeball.png" alt="Game icon" width={20} height={20} />
+            Start Game
           </button>
+
           <button
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
+            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-semibold hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
             onClick={() => router.push("/faq")}
           >
-            How to play
+            How to Play
           </button>
         </div>
       </main>

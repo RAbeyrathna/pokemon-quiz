@@ -24,7 +24,7 @@ Take a look at the live demo [here](https://pokequiz.rabeyrathna.com/)!
 ## Technologies Used
 
 - **HTML** – Base markup.
-- **TypeScript** – Type-safe JavaSgicript for reliability.
+- **TypeScript** – Type-safe JavaScript for reliability.
 - **React** – Component-based UI building.
 - **Next.js** – Framework for building fast, SEO-friendly React apps with routing and API support.
 - **TailwindCSS** – Utility-first styling for responsive design.

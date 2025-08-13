@@ -17,7 +17,7 @@ export default function Home() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 items-center">
           <button
-            className="flex btn-primary items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4"
+            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white font-semibold transition-colors"
             onClick={() => router.push("/game")}
           >
             <Image src="/pokeball.png" alt="Game icon" width={20} height={20} />
@@ -25,7 +25,7 @@ export default function Home() {
           </button>
 
           <button
-            className="flex btn-secondary"
+            className="flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-[var(--secondary)] text-black hover:bg-[var(--secondary-hover)] font-semibold transition-colors"
             onClick={() => router.push("/faq")}
           >
             How to Play

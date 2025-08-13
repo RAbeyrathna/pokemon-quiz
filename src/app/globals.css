@@ -34,27 +34,3 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
-
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--foreground);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-}
-
-.btn-secondary {
-  background-color: var(--secondary);
-  color: #000;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-.btn-secondary:hover {
-  background-color: var(--secondary-hover);
-}

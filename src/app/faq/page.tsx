@@ -17,9 +17,9 @@ export default function FAQPage() {
             What is Pokémon Cry Quiz?
           </h2>
           <p>
-            Pokémon Cry Quiz is a fun game where you listen to a Pokémon's cry
-            and try to guess which Pokémon it is. Each correct guess earns you
-            points!
+            Pokémon Cry Quiz is a fun game where you listen to a Pokémon&apos;s
+            cry and try to guess which Pokémon it is. Each correct guess earns
+            you points!
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export default function FAQPage() {
               question).
             </li>
             <li>Choose which Pokémon generations you want to include.</li>
-            <li>Click "Start Game" to begin.</li>
+            <li>Click &quot;Start Game&quot; to begin.</li>
             <li>
               Listen to the Pokémon cry and select the correct Pokémon from the
               options.

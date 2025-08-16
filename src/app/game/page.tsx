@@ -38,10 +38,12 @@ export default function GamePage() {
   if (!gameStarted) {
     // Show Settings form first, no game yet
     return (
-      <div>
-        <h1>Pokémon Cry Quiz</h1>
+      <div className="relative min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-sans">
         <Settings onStart={onStart} />
-        <button className="text-white" onClick={() => router.push("/")}>
+        <button
+          className="px-5 py-2 mt-5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+          onClick={() => router.push("/")}
+        >
           Return Home
         </button>
       </div>

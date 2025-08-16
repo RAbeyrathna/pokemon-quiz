@@ -41,7 +41,9 @@ export default function GamePage() {
       <div>
         <h1>Pokémon Cry Quiz</h1>
         <Settings onStart={onStart} />
-        <button onClick={() => router.push("/")}>Return Home</button>
+        <button className="text-white" onClick={() => router.push("/")}>
+          Return Home
+        </button>
       </div>
     );
   }
@@ -110,7 +112,9 @@ export default function GamePage() {
         </div>
       )}
 
-      <button onClick={() => router.push("/")}>Return Home</button>
+      <button className="text-white" onClick={() => router.push("/")}>
+        Return Home
+      </button>
     </div>
   );
 }

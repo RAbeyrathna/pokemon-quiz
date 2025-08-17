@@ -36,7 +36,6 @@ export default function GamePage() {
   };
 
   if (!gameStarted) {
-    // Show Settings form first, no game yet
     return (
       <div className="relative min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-sans">
         <Settings onStart={onStart} />
@@ -50,7 +49,6 @@ export default function GamePage() {
     );
   }
 
-  // Game has started — destructure the hook's state and handlers
   const {
     options,
     correctAnswer,
@@ -64,59 +62,96 @@ export default function GamePage() {
   } = quiz;
 
   return (
-    <div>
-      <h1>Pokémon Cry Quiz</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 font-sans bg-gradient-to-br from-blue-100 to-indigo-200">
+      <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8 text-center">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">
+          Pokémon Cry Quiz
+        </h1>
 
-      {!gameOver && (
-        <>
-          <div>
-            Round {round} of {gameSettings.rounds}
-          </div>
+        {!gameOver && (
+          <>
+            <p className="mb-4 text-gray-600 font-medium">
+              Round {round} of {gameSettings.rounds}
+            </p>
 
-          {correctAnswer && (
-            <>
-              <audio ref={audioRef} src={correctAnswer.cry} autoPlay />
-              <button onClick={handlePlayCry}>Play Cry</button>
-            </>
-          )}
-
-          <div>
-            {options.map((pokemon) => (
-              <div key={pokemon.name}>
-                <button onClick={() => handleAnswerClick(pokemon.name)}>
-                  {pokemon.name}
+            {correctAnswer && (
+              <div className="mb-6">
+                <audio ref={audioRef} src={correctAnswer.cry} autoPlay />
+                <button
+                  onClick={handlePlayCry}
+                  className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors"
+                >
+                  Play Cry
                 </button>
               </div>
-            ))}
-          </div>
+            )}
 
-          {selectedAnswer && (
-            <p>
-              {selectedAnswer === correctAnswer?.name
-                ? "✅ Correct!"
-                : `❌ Wrong! It was ${correctAnswer?.name}`}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {options.map((pokemon) => (
+                <button
+                  key={pokemon.name}
+                  onClick={() => handleAnswerClick(pokemon.name)}
+                  className="px-4 py-3 rounded-lg bg-gray-100 hover:bg-indigo-100 text-gray-800 font-medium shadow-sm transition-colors"
+                >
+                  {pokemon.name}
+                </button>
+              ))}
+            </div>
+
+            {selectedAnswer && (
+              <p
+                className={`text-lg font-semibold ${
+                  selectedAnswer === correctAnswer?.name
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
+                {selectedAnswer === correctAnswer?.name
+                  ? "✅ Correct!"
+                  : `❌ Wrong! It was ${correctAnswer?.name}`}
+              </p>
+            )}
+          </>
+        )}
+
+        {gameOver && (
+          <div className="mt-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">Game Over!</h2>
+            <p className="text-gray-700 font-medium mb-2">
+              Score: <span className="font-bold">{score}</span> /{" "}
+              {gameSettings.rounds}
             </p>
-          )}
-        </>
-      )}
+            <p className="text-gray-700 font-medium mb-6">
+              Accuracy:{" "}
+              <span className="font-bold">
+                {Math.round((score / gameSettings.rounds) * 100)}%
+              </span>
+            </p>
 
-      {gameOver && (
-        <div>
-          <h1>Game Over!</h1>
-          <p>
-            Score: {score} / {gameSettings.rounds}
-          </p>
-          <p>Accuracy: {Math.round((score / gameSettings.rounds) * 100)}%</p>
-          <button onClick={() => quiz.startGame(gameSettings)}>
-            Play Again
-          </button>
-          <button onClick={onResetGame}>Change Settings</button>
-        </div>
-      )}
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={() => quiz.startGame(gameSettings)}
+                className="px-5 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors"
+              >
+                Play Again
+              </button>
+              <button
+                onClick={onResetGame}
+                className="px-5 py-2 rounded-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold transition-colors"
+              >
+                Change Settings
+              </button>
+            </div>
+          </div>
+        )}
 
-      <button className="text-white" onClick={() => router.push("/")}>
-        Return Home
-      </button>
+        <button
+          className="mt-8 px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
+          onClick={() => router.push("/")}
+        >
+          Return Home
+        </button>
+      </div>
     </div>
   );
 }

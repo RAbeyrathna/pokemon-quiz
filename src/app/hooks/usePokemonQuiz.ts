@@ -91,13 +91,11 @@ export function usePokemonQuiz(settings: GameSettings | null) {
       setScore((prev) => prev + 1);
     }
 
-    setTimeout(() => {
-      if (gameSettings && round < gameSettings.rounds) {
-        setRound((prev) => prev + 1);
-      } else {
-        setGameOver(true);
-      }
-    }, 1500);
+    if (gameSettings && round < gameSettings.rounds) {
+      setRound((prev) => prev + 1);
+    } else {
+      setGameOver(true);
+    }
   };
 
   const handlePlayCry = () => {

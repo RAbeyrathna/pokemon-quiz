@@ -97,20 +97,6 @@ export default function GamePage() {
                 </button>
               ))}
             </div>
-
-            {selectedAnswer && (
-              <p
-                className={`text-lg font-semibold ${
-                  selectedAnswer === correctAnswer?.name
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                {selectedAnswer === correctAnswer?.name
-                  ? "✅ Correct!"
-                  : `❌ Wrong! It was ${correctAnswer?.name}`}
-              </p>
-            )}
           </>
         )}
 

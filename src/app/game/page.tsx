@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import Settings from "../components/Settings";
-import {
-  usePokemonQuiz,
-  generations as allGenerations,
-} from "../hooks/usePokemonQuiz";
+import { usePokemonQuiz } from "../hooks/usePokemonQuiz";
+
+import { generations as allGenerations } from "../lib/pokemon";
+
 import { GameSettings } from "../types/game";
 
 export default function GamePage() {

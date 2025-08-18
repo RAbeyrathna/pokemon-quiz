@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import { GameSettings } from "../types/game";
-import { generations as allGenerations } from "../hooks/usePokemonQuiz";
+import { generations as allGenerations } from "../lib/pokemon";
 
 type SettingsProps = {
   onStart: (settings: GameSettings) => void;

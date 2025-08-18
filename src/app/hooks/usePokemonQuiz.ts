@@ -1,19 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-import { GameSettings, Generations, PokemonOption } from "../types/game";
+import { GameSettings, PokemonOption } from "../types/game";
 import { capitalise } from "../lib/string";
-
-export const generations: Generations[] = [
-  { gen: 1, name: "Kanto", range: [1, 151] },
-  { gen: 2, name: "Johto", range: [152, 251] },
-  { gen: 3, name: "Hoenn", range: [252, 386] },
-  { gen: 4, name: "Sinnoh", range: [387, 493] },
-  { gen: 5, name: "Unova", range: [494, 649] },
-  { gen: 6, name: "Kalos", range: [650, 721] },
-  { gen: 7, name: "Alola", range: [722, 809] },
-  { gen: 8, name: "Galar", range: [810, 898] },
-  { gen: 9, name: "Paldea", range: [899, 1010] },
-];
+import { pickRandomPokemonIds } from "../lib/pokemon";
 
 export function usePokemonQuiz(settings: GameSettings | null) {
   const [options, setOptions] = useState<PokemonOption[]>([]);
@@ -35,21 +24,7 @@ export function usePokemonQuiz(settings: GameSettings | null) {
   const fetchPokemonData = async (settings: GameSettings) => {
     const { choices, generations } = settings;
 
-    const ids = new Set<number>();
-    while (ids.size < choices) {
-      // Pick a random generation object from the generations array
-      const randomGenObj =
-        generations[Math.floor(Math.random() * generations.length)];
-
-      // Destructure the start and end of the range from the picked gen's range
-      const [startId, endId] = randomGenObj.range;
-
-      // Pick a random Pokemon ID within the range
-      const randomId =
-        Math.floor(Math.random() * (endId - startId + 1)) + startId;
-
-      ids.add(randomId);
-    }
+    const ids = pickRandomPokemonIds(choices, generations);
 
     const promises = Array.from(ids).map(async (id) => {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);

@@ -1,6 +1,7 @@
 export type PokemonOption = {
   name: string;
   cry: string;
+  sprite: string;
 };
 
 export type Generations = {

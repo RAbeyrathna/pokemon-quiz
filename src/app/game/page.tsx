@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import Settings from "../components/Settings";
 import {
@@ -73,6 +74,21 @@ export default function GamePage() {
             <p className="mb-4 text-gray-600 font-medium">
               Round {round} of {gameSettings.rounds}
             </p>
+
+            <div className="mb-4">
+              <p className="font-medium text-gray-700 mb-2">
+                Sprite of Pokémon:
+              </p>
+              {correctAnswer?.sprite && (
+                <Image
+                  src={correctAnswer.sprite}
+                  alt={correctAnswer.name}
+                  width={96}
+                  height={96}
+                  className="mx-auto"
+                />
+              )}
+            </div>
 
             {correctAnswer && (
               <div className="mb-6">

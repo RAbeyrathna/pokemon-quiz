@@ -56,6 +56,7 @@ export function usePokemonQuiz(settings: GameSettings | null) {
       return {
         name: data.name,
         cry: data.cries.latest,
+        sprite: data.sprites.front_default,
       };
     });
 

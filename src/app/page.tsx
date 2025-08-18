@@ -10,7 +10,7 @@ export default function Home() {
     <div className="relative min-h-screen flex flex-col items-center justify-center p-8 sm:p-20 font-sans">
       <main className="flex flex-col items-center sm:items-start gap-8">
         <header className="font-mono text-3xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 text-center sm:text-left">
-          Pokémon Cry Quiz
+          Who&apos;s that Pokémon?
         </header>
         <p className="font-mono text-sm sm:text-lg text-gray-700 dark:text-gray-300 text-center sm:text-left">
           Try to become the very best!

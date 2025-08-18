@@ -66,26 +66,23 @@ export default function GamePage() {
     <div className="min-h-screen flex flex-col items-center justify-center p-6 font-sans bg-gradient-to-br from-blue-100 to-indigo-200">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8 text-center">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">
-          Pokémon Cry Quiz
+          Who&apos;s that Pokémon?
         </h1>
 
         {!gameOver && (
           <>
-            <p className="mb-4 text-gray-600 font-medium">
+            <p className=" text-gray-600 font-medium">
               Round {round} of {gameSettings.rounds}
             </p>
 
-            <div className="mb-4">
-              <p className="font-medium text-gray-700 mb-2">
-                Sprite of Pokémon:
-              </p>
+            <div className="">
               {correctAnswer?.sprite && (
                 <Image
                   src={correctAnswer.sprite}
                   alt={correctAnswer.name}
                   width={96}
                   height={96}
-                  className="mx-auto"
+                  className="mx-auto filter brightness-0"
                 />
               )}
             </div>

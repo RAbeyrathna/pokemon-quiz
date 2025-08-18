@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { GameSettings, Generations, PokemonOption } from "../types/game";
+import { capitalise } from "../lib/string";
 
 export const generations: Generations[] = [
   { gen: 1, name: "Kanto", range: [1, 151] },
@@ -54,7 +55,7 @@ export function usePokemonQuiz(settings: GameSettings | null) {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
       const data = await res.json();
       return {
-        name: data.name,
+        name: capitalise(data.name),
         cry: data.cries.latest,
         sprite: data.sprites.front_default,
       };
